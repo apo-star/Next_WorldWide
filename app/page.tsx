@@ -23,6 +23,7 @@ import {
 	TableRow,
 } from "@/components/ui/table";
 import Lenis from "@studio-freight/lenis";
+import Image from "next/image";
 
 export default function Home() {
 	const firstText = useRef(null);
@@ -203,6 +204,7 @@ export default function Home() {
 							<CarouselContent>
 								<CarouselItem>
 									<img src="/images/pic1.png" alt="pic" className="md:w-3/6 mx-auto" />
+			
 								</CarouselItem>
 								<CarouselItem>
 									<img src="/images/pic2.png" alt="pic" className="md:w-3/6 mx-auto" />
