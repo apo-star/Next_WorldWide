@@ -1,14 +1,8 @@
 .description {
-	padding-left: 200px;
-	padding-right: 200px;
-	margin-top: 200px;
 	display: flex;
 	justify-content: center;
 }
 .description .body {
-	max-width: 1400px;
-	display: flex;
-	gap: 50px;
 	position: relative;
 }
 .description .body p {
@@ -29,7 +23,6 @@
 }
 .description .body p:nth-of-type(2) {
 	font-size: 18px;
-	width: 80%;
 	font-weight: 300;
 }
 .description .body .button {

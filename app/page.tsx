@@ -112,7 +112,7 @@ export default function Home() {
 
 	return (
 		<>
-			<div className="min-h-screen">
+			<div className="overflow-x-hidden">
 				<main className="relative flex h-[100vh] overflow-hidden">
 					<div className="min-h-screen mx-auto">
 						<img
@@ -122,112 +122,117 @@ export default function Home() {
 						/>
 					</div>
 					<div className="absolute" style={{ top: `calc(100vh - 400px)` }}>
-						<div ref={slider} className="relative whitespace-nowrap">
+						<div ref={slider} className="relative whitespace-nowrap md:mt-0 mt-20">
 							<p
 								ref={firstText}
-								className="relative m-0 font-semibold pr-12 text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-black to-blue-500 animate-gradient"
-								style={{ fontSize: "230px" }}
+								className="relative text-[120px] md:text-[230px] m-0 font-semibold pr-12 text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-black to-blue-500 animate-gradient"
 							>
 								PLTW WorldWide -
 							</p>
 							<p
 								ref={secondText}
-								className="absolute left-full top-0 font-semibold text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-black to-blue-500 animate-gradient"
-								style={{ fontSize: "230px" }}
+								className="absolute text-[120px] md:text-[230px] left-full top-0 font-semibold text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-black to-blue-500 animate-gradient"
 							>
 								PLTW WorldWide -
 							</p>
 						</div>
 					</div>
 				</main>
-			</div>
-			<div
-				ref={description}
-				className={`${styles.description} bg-blue-900 p-20 text-white`}
-			>
-				<div className={styles.body}>
-					<p>
-						{phrase.split(" ").map((word, index) => {
-							return (
-								<span key={index} className={styles.mask}>
-									<motion.span
-										variants={slideUp}
-										custom={index}
-										animate={isInView ? "open" : "closed"}
-										key={index}
-									>
-										{word}
-									</motion.span>
-								</span>
-							);
-						})}
-					</p>
-					<motion.p variants={opacity} animate={isInView ? "open" : "closed"}>
-						<Table className="border rounded-md">
-							<TableCaption>Jersey Size</TableCaption>
-							<TableHeader>
-								<TableRow className="bg-black">
-									<TableHead className="w-[100px] text-center text-white">
-										Size
-									</TableHead>
-									<TableHead className="text-center text-white">Length</TableHead>
-									<TableHead className="text-center text-white">Width</TableHead>
-								</TableRow>
-							</TableHeader>
-							<TableBody>
-								{tableData.map((rowData, index) => (
-									<TableRow key={index} className="text-center">
-										<TableCell className="font-bold">{rowData.size}</TableCell>
-										<TableCell>{rowData.length}</TableCell>
-										<TableCell>{rowData.width}</TableCell>
+				<div
+					ref={description}
+					className={`${styles.description} bg-blue-900 p-5 md:p-20 text-white mt-[50px] md:mt-[200px]`}
+				>
+					<div
+						className={`${styles.body} grid grid-cols-1 md:grid-cols-2 gap-4 mx-auto text-5xl`}
+					>
+						<p className="px-20 text-center">
+							{phrase.split(" ").map((word, index) => {
+								return (
+									<span key={index} className={styles.mask}>
+										<motion.span
+											variants={slideUp}
+											custom={index}
+											animate={isInView ? "open" : "closed"}
+											key={index}
+										>
+											{word}
+										</motion.span>
+									</span>
+								);
+							})}
+						</p>
+						<motion.p
+							variants={opacity}
+							animate={isInView ? "open" : "closed"}
+							className="md:col-span-1 md:w-4/5 w-full"
+						>
+							<Table className="border rounded-md w-full">
+								<TableCaption>Jersey Size</TableCaption>
+								<TableHeader>
+									<TableRow className="bg-black">
+										<TableHead className="w-[100px] text-center text-white">
+											Size
+										</TableHead>
+										<TableHead className="text-center text-white">Length</TableHead>
+										<TableHead className="text-center text-white">Width</TableHead>
 									</TableRow>
-								))}
-							</TableBody>
-						</Table>
-					</motion.p>
-				</div>
-			</div>
-			<div className="flex items-center flex-col mt-[300px] space-x-[20vw]">
-				<div ref={body} className="mb-[200px] grid grid-cols-5">
-					<div ref={textRef} className="col-span-4 mt-10">
-						<p className="ms-10 md:m-0 font-bold text-8xl">Interested to wear?</p>
-						<h4 className="scroll-m-20 ms-10 mt-10 text-xl font-semibold tracking-tight">
-							Hurry Up & Grab it
-						</h4>
+								</TableHeader>
+								<TableBody>
+									{tableData.map((rowData, index) => (
+										<TableRow key={index} className="text-center">
+											<TableCell className="font-bold">{rowData.size}</TableCell>
+											<TableCell>{rowData.length}</TableCell>
+											<TableCell>{rowData.width}</TableCell>
+										</TableRow>
+									))}
+								</TableBody>
+							</Table>
+						</motion.p>
 					</div>
 				</div>
-			</div>
-			<div ref={ball}>
-				<div className="grid md:grid-cols-12 grid-cols-1 mt-20 bg-red-600">
-					<div className="col-span-5 p-44 md:p-20">
-						<Carousel>
-							<CarouselContent>
-								<CarouselItem>
-									<img src="/images/pic1.png" alt="pic" className="md:w-3/6 mx-auto" />
-			
-								</CarouselItem>
-								<CarouselItem>
-									<img src="/images/pic2.png" alt="pic" className="md:w-3/6 mx-auto" />
-								</CarouselItem>
-							</CarouselContent>
-							<CarouselPrevious />
-							<CarouselNext />
-						</Carousel>
-					</div>
-					<div className="col-span-7 p-20 text-center items-center">
-						<h1 className="scroll-m-20 text-4xl font-extrabold tracking-wider lg:text-5xl md:mt-20 mb-5">
-							Front Jersey
-						</h1>
-						<h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
-							Enhance your style with our University-logo adorned sublimation jersey!
-						</h3>
+				<div className="flex items-center flex-col mt-[300px] space-x-[20vw]">
+					<div ref={body} className="mb-[200px] grid grid-cols-5">
+						<div ref={textRef} className="col-span-4 mt-10">
+							<p className="ms-10 md:m-0 font-bold text-5xl md:text-8xl">
+								Interested to wear?
+							</p>
+							<h4 className="scroll-m-20 ms-10 mt-10 text-xl font-semibold tracking-tight">
+								Hurry Up & Grab it
+							</h4>
+						</div>
 					</div>
 				</div>
-				<motion.div style={{ height }} className={styles.circleContainer}>
-					<div className={`${styles.circle} bg-red-600`}></div>
-				</motion.div>
+				<div ref={ball}>
+					<div className="grid md:grid-cols-12 grid-cols-1 mt-20 bg-red-600">
+						<div className="col-span-5 p-44 md:p-20">
+							<Carousel>
+								<CarouselContent>
+									<CarouselItem>
+										<img src="/images/pic1.png" alt="pic" className="md:w-3/6 mx-auto" />
+									</CarouselItem>
+									<CarouselItem>
+										<img src="/images/pic2.png" alt="pic" className="md:w-3/6 mx-auto" />
+									</CarouselItem>
+								</CarouselContent>
+								<CarouselPrevious />
+								<CarouselNext />
+							</Carousel>
+						</div>
+						<div className="col-span-7 p-20 text-center items-center">
+							<h1 className="scroll-m-20 text-4xl font-extrabold tracking-wider lg:text-5xl md:mt-20 mb-5">
+								Front Jersey
+							</h1>
+							<h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+								Enhance your style with our University-logo adorned sublimation jersey!
+							</h3>
+						</div>
+					</div>
+					<motion.div className="relative" style={{ height }}>
+						<div className="absolute h-[1550%] w-[120%] left-[-10%] rounded-b-[2000%] bg-red-600 shadow-lg"></div>
+					</motion.div>
+				</div>
+				<div className="min-h-screen bg-black">Hafiz</div>
 			</div>
-			<div className="min-h-screen bg-black">Hafiz</div>
 		</>
 	);
 }
