@@ -25,6 +25,11 @@ export default function Home() {
 	];
 	return (
 		<>
+			<div className="pt-10 w-full">
+				<h1 className="scroll-m-20 text-[50px] md:text-[100px] font-medium text-center tracking-wider">
+					PLTW
+				</h1>
+			</div>
 			<Sheet>
 				<div className="absolute top-0 right-0 z-10 p-8">
 					<SheetTrigger>

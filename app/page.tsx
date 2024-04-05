@@ -118,7 +118,7 @@ export default function Home() {
 						<img
 							src="/images/pic1.png"
 							alt="background"
-							className="w-fullh-full blur-sm"
+							className="md:w-full md:h-full blur-sm md:px-0 px-5 pt-44"
 						/>
 					</div>
 					<div className="absolute" style={{ top: `calc(100vh - 400px)` }}>
@@ -140,12 +140,12 @@ export default function Home() {
 				</main>
 				<div
 					ref={description}
-					className={`${styles.description} bg-blue-900 p-5 md:p-20 text-white mt-[50px] md:mt-[200px]`}
+					className={`${styles.description} bg-blue-900 py-20 p-10 md:p-20 text-white mt-50px md:mt-[200px]`}
 				>
 					<div
 						className={`${styles.body} grid grid-cols-1 md:grid-cols-2 gap-4 mx-auto text-5xl`}
 					>
-						<p className="px-20 text-center">
+						<p className="px-5 text-center">
 							{phrase.split(" ").map((word, index) => {
 								return (
 									<span key={index} className={styles.mask}>
@@ -204,7 +204,7 @@ export default function Home() {
 				</div>
 				<div ref={ball}>
 					<div className="grid md:grid-cols-12 grid-cols-1 mt-20 bg-red-600">
-						<div className="col-span-5 p-44 md:p-20">
+						<div className="col-span-5 p-20">
 							<Carousel>
 								<CarouselContent>
 									<CarouselItem>
@@ -220,7 +220,7 @@ export default function Home() {
 						</div>
 						<div className="col-span-7 p-20 text-center items-center">
 							<h1 className="scroll-m-20 text-4xl font-extrabold tracking-wider lg:text-5xl md:mt-20 mb-5">
-								Front Jersey
+								Preview
 							</h1>
 							<h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
 								Enhance your style with our University-logo adorned sublimation jersey!
