@@ -2,8 +2,6 @@ import React, { useState } from "react";
 // import styles from "./style.module.css";
 import { motion } from "framer-motion";
 import { menuSlide } from "../anim";
-import Curve from "./Curve";
-import Footer from "./Footer";
 
 export default function index() {
 	return (
@@ -21,9 +19,7 @@ export default function index() {
 					</div>
 					<p className="font-extrabold text-3xl"></p>
 				</div>
-				<Footer />
 			</div>
-			<Curve />
 		</motion.div>
 	);
 }

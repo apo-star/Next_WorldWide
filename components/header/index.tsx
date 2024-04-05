@@ -5,7 +5,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ChevronLeft, Menu } from "lucide-react";
 import { menuSlide } from "./anim";
-import Footer from "./nav/Footer";
 import Link from "next/link";
 import {
 	Popover,
@@ -99,7 +98,6 @@ export default function Home() {
 									</PopoverContent>
 								</Popover>
 							</div>
-							<Footer />
 						</div>
 					</motion.div>
 				</SheetContent>
