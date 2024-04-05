@@ -12,6 +12,11 @@ import {
 	PopoverTrigger,
 } from "@/components/ui/popover";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Lobster } from "next/font/google";
+const lobster = Lobster({
+	weight: "400",
+	subsets: ["latin"],
+});
 
 export default function Home() {
 	const [isActive, setIsActive] = useState(false);
@@ -26,18 +31,20 @@ export default function Home() {
 	return (
 		<>
 			<div className="pt-10 w-full">
-				<h1 className="scroll-m-20 text-[50px] md:text-[100px] font-medium text-center tracking-wider">
+				<h1
+					className={` ${lobster.className} scroll-m-20 text-[50px] md:text-[100px] font-medium text-center tracking-wider`}
+				>
 					PLTW
 				</h1>
 			</div>
 			<Sheet>
-				<div className="absolute top-0 right-0 z-10 p-8">
+				<div className="fixed top-0 right-0 z-50 p-8">
 					<SheetTrigger>
 						<div
 							onClick={() => {
 								setIsActive(!isActive);
 							}}
-							className="w-20 h-20 rounded-full bg-gray-400 flex items-center justify-center cursor-pointer"
+							className="w-14 h-14 rounded-full bg-gray-400 flex items-center justify-center cursor-pointer"
 						>
 							<div>
 								<Menu size={24} />
@@ -46,7 +53,7 @@ export default function Home() {
 					</SheetTrigger>
 				</div>
 
-				<SheetContent className="opacity-70 w-max">
+				<SheetContent className="w-max bg-white bg-opacity-80 ">
 					<motion.div
 						variants={menuSlide}
 						initial="initial"
@@ -56,7 +63,7 @@ export default function Home() {
 					>
 						<div className="flex flex-col justify-between h-full p-10">
 							<div className="flex flex-col space-y-5">
-								<div className="text-3xl pb-5 text-gray-600 uppercase border-b text-center border-gray-600 mb-4">
+								<div className="text-3xl pb-5 text-gray-800 uppercase border-b text-center border-gray-600 mb-4">
 									PLTW X ZUSH
 								</div>
 								{navItems.map((item, index) => (
@@ -81,6 +88,7 @@ export default function Home() {
 										<div className="grid grid-cols-2 gap-4">
 											<Link
 												href="https://wa.link/nrwpef"
+												target="_blank"
 												className="flex flex-col items-center"
 											>
 												<Avatar>
@@ -91,6 +99,7 @@ export default function Home() {
 											</Link>
 											<Link
 												href="https://wa.link/3tnaky"
+												target="_blank"
 												className="flex flex-col items-center"
 											>
 												<Avatar>

@@ -1,5 +1,15 @@
 import type { Metadata } from "next";
-import { Inter as FontSans } from "next/font/google";
+import {
+	Inter as FontSans,
+	Fira_Sans,
+	JetBrains_Mono,
+	Courier_Prime,
+	Oswald,
+	Bebas_Neue,
+	Pacifico,
+	Roboto,
+	Montserrat,
+} from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -9,6 +19,55 @@ const fontSans = FontSans({
 	subsets: ["latin"],
 	variable: "--font-sans",
 });
+
+const firaSansFont = Fira_Sans({
+	weight: "400",
+	subsets: ["greek"],
+	variable: "--font-sans",
+});
+
+const JetBrainsMonoFont = JetBrains_Mono({
+	weight: "400",
+	subsets: ["cyrillic-ext"],
+	variable: "--font-sans",
+});
+
+const CourierPrimeFont = Courier_Prime({
+	weight: "400",
+	subsets: ["latin"],
+	variable: "--font-sans",
+});
+
+const oswaldFont = Oswald({
+	weight: "400",
+	subsets: ["latin"],
+	variable: "--font-sans",
+});
+
+const BebasNeueFont = Bebas_Neue({
+	weight: "400",
+	subsets: ["latin"],
+	variable: "--font-sans",
+});
+
+const PacificoFont = Pacifico({
+	weight: "400",
+	subsets: ["latin"],
+	variable: "--font-sans",
+});
+
+const RobotoFont = Roboto({
+	weight: "400",
+	subsets: ["latin"],
+	variable: "--font-sans",
+});
+
+const MontserratFont = Montserrat({
+	weight: "400",
+	subsets: ["latin"],
+	variable: "--font-sans",
+});
+
 export const metadata: Metadata = {
 	title: "PLTW. WorldWide",
 	description: "Merch",
@@ -25,7 +84,7 @@ export default function RootLayout({
 			<body
 				className={cn(
 					"min-h-screen bg-background font-sans antialiased",
-					fontSans.variable
+					RobotoFont.variable
 				)}
 			>
 				<ThemeProvider
@@ -34,9 +93,7 @@ export default function RootLayout({
 					enableSystem
 					disableTransitionOnChange
 				>
-					<div className="z-10 absolute top-0 left-0 w-full">
-						<Headers />
-					</div>
+					<Headers />
 					{children}
 				</ThemeProvider>
 			</body>
