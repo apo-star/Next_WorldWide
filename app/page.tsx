@@ -1,113 +1,231 @@
-import Image from "next/image";
+"use client";
+
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
+import {
+	Carousel,
+	CarouselContent,
+	CarouselItem,
+	CarouselNext,
+	CarouselPrevious,
+} from "@/components/ui/carousel";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import styles from "./style.module.css";
+import { slideUp, opacity } from "./animation";
+import {
+	Table,
+	TableBody,
+	TableCaption,
+	TableCell,
+	TableHead,
+	TableHeader,
+	TableRow,
+} from "@/components/ui/table";
+import Lenis from "@studio-freight/lenis";
 
 export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+	const firstText = useRef(null);
+	const secondText = useRef(null);
+	const slider = useRef(null);
+	const body = useRef(null);
+	let xPercent = 0;
+	let direction = -1;
+	const description = useRef(null);
+	const isInView = useInView(description);
+	const phrase = "PLTW UTHM - Official PLTW X UTHM Edition";
+	const ball = useRef(null);
+	const { scrollYProgress } = useScroll({
+		target: ball,
+		offset: ["start end", "end start"],
+	});
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+	useEffect(() => {
+		const lenis = new Lenis();
+		lenis.on("scroll", ScrollTrigger.update);
 
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+		gsap.ticker.add((time: any) => {
+			lenis.raf(time * 1000);
+		});
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+		gsap.ticker.lagSmoothing(0);
+		gsap.registerPlugin(ScrollTrigger);
+		gsap.to(slider.current, {
+			scrollTrigger: {
+				trigger: document.documentElement,
+				scrub: 0.25,
+				start: 0,
+				end: window.innerHeight,
+				onUpdate: (e) => (direction = e.direction * -1),
+			},
+			x: "-500px",
+		});
+		requestAnimationFrame(animate);
+	}, []);
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
+	const animate = () => {
+		if (xPercent < -100) {
+			xPercent = 0;
+		} else if (xPercent > 0) {
+			xPercent = -100;
+		}
+		gsap.set(firstText.current, { xPercent: xPercent });
+		gsap.set(secondText.current, { xPercent: xPercent });
+		requestAnimationFrame(animate);
+		xPercent += 0.1 * direction;
+	};
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  );
+	const textRef = useRef(null);
+
+	useEffect(() => {
+		gsap.registerPlugin(ScrollTrigger);
+
+		const tl = gsap.timeline({
+			scrollTrigger: {
+				trigger: body.current,
+				start: "top center",
+				end: "250px",
+				scrub: true,
+			},
+		});
+
+		tl.to(textRef.current, {
+			y: -200,
+			opacity: 0,
+			duration: 5,
+			ease: "power1.inOut",
+		});
+	}, []);
+
+	const tableData = [
+		{ size: "S", length: 26, width: 17.5 },
+		{ size: "M", length: 27, width: 18.5 },
+		{ size: "L", length: 28, width: 19.5 },
+		{ size: "XL", length: 29, width: 20.5 },
+		{ size: "XXL", length: 30, width: 21.5 },
+		{ size: "XXXL", length: 31, width: 22.5 },
+		{ size: "XXXXL", length: 32, width: 23.5 },
+	];
+
+	const height = useTransform(scrollYProgress, [0, 0.8], [50, 0]);
+
+	return (
+		<>
+			<div className="min-h-screen">
+				<main className="relative flex h-[100vh] overflow-hidden">
+					<div className="min-h-screen mx-auto">
+						<img
+							src="/images/pic1.png"
+							alt="background"
+							className="w-fullh-full blur-sm"
+						/>
+					</div>
+					<div className="absolute" style={{ top: `calc(100vh - 400px)` }}>
+						<div ref={slider} className="relative whitespace-nowrap">
+							<p
+								ref={firstText}
+								className="relative m-0 font-semibold pr-12 text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-black to-blue-500 animate-gradient"
+								style={{ fontSize: "230px" }}
+							>
+								PLTW WorldWide -
+							</p>
+							<p
+								ref={secondText}
+								className="absolute left-full top-0 font-semibold text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-black to-blue-500 animate-gradient"
+								style={{ fontSize: "230px" }}
+							>
+								PLTW WorldWide -
+							</p>
+						</div>
+					</div>
+				</main>
+			</div>
+			<div
+				ref={description}
+				className={`${styles.description} bg-blue-900 p-20 text-white`}
+			>
+				<div className={styles.body}>
+					<p>
+						{phrase.split(" ").map((word, index) => {
+							return (
+								<span key={index} className={styles.mask}>
+									<motion.span
+										variants={slideUp}
+										custom={index}
+										animate={isInView ? "open" : "closed"}
+										key={index}
+									>
+										{word}
+									</motion.span>
+								</span>
+							);
+						})}
+					</p>
+					<motion.p variants={opacity} animate={isInView ? "open" : "closed"}>
+						<Table className="border rounded-md">
+							<TableCaption>Jersey Size</TableCaption>
+							<TableHeader>
+								<TableRow className="bg-black">
+									<TableHead className="w-[100px] text-center text-white">
+										Size
+									</TableHead>
+									<TableHead className="text-center text-white">Length</TableHead>
+									<TableHead className="text-center text-white">Width</TableHead>
+								</TableRow>
+							</TableHeader>
+							<TableBody>
+								{tableData.map((rowData, index) => (
+									<TableRow key={index} className="text-center">
+										<TableCell className="font-bold">{rowData.size}</TableCell>
+										<TableCell>{rowData.length}</TableCell>
+										<TableCell>{rowData.width}</TableCell>
+									</TableRow>
+								))}
+							</TableBody>
+						</Table>
+					</motion.p>
+				</div>
+			</div>
+			<div className="flex items-center flex-col mt-[300px] space-x-[20vw]">
+				<div ref={body} className="mb-[200px] grid grid-cols-5">
+					<div ref={textRef} className="col-span-4 mt-10">
+						<p className="ms-10 md:m-0 font-bold text-8xl">Interested to wear?</p>
+						<h4 className="scroll-m-20 ms-10 mt-10 text-xl font-semibold tracking-tight">
+							Hurry Up & Grab it
+						</h4>
+					</div>
+				</div>
+			</div>
+			<div ref={ball}>
+				<div className="grid md:grid-cols-12 grid-cols-1 mt-20 bg-red-600">
+					<div className="col-span-5 p-44 md:p-20">
+						<Carousel>
+							<CarouselContent>
+								<CarouselItem>
+									<img src="/images/pic1.png" alt="pic" className="md:w-3/6 mx-auto" />
+								</CarouselItem>
+								<CarouselItem>
+									<img src="/images/pic2.png" alt="pic" className="md:w-3/6 mx-auto" />
+								</CarouselItem>
+							</CarouselContent>
+							<CarouselPrevious />
+							<CarouselNext />
+						</Carousel>
+					</div>
+					<div className="col-span-7 p-20 text-center items-center">
+						<h1 className="scroll-m-20 text-4xl font-extrabold tracking-wider lg:text-5xl md:mt-20 mb-5">
+							Front Jersey
+						</h1>
+						<h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+							Enhance your style with our University-logo adorned sublimation jersey!
+						</h3>
+					</div>
+				</div>
+				<motion.div style={{ height }} className={styles.circleContainer}>
+					<div className={`${styles.circle} bg-red-600`}></div>
+				</motion.div>
+			</div>
+			<div className="min-h-screen bg-black">Hafiz</div>
+		</>
+	);
 }
