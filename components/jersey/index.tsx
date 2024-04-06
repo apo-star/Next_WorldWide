@@ -14,7 +14,7 @@ import {
 	AccordionTrigger,
 } from "../ui/accordion";
 
-export default function index() {
+export default function Index() {
 	const ball = useRef(null);
 
 	const { scrollYProgress } = useScroll({

@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 
-export default function index() {
+export default function Index() {
 	const body = useRef(null);
 	const body2 = useRef(null);
 	const textRef = useRef(null);

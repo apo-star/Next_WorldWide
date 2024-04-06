@@ -4,7 +4,7 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 import { toast } from "sonner";
 
-export default function index() {
+export default function Index() {
 	const handleClick = () => {
 		const promise = () =>
 			new Promise((resolve) =>
