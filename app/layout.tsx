@@ -14,6 +14,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
 import Headers from "@/components/header";
+import { Toaster } from "sonner";
 
 const fontSans = FontSans({
 	subsets: ["latin"],
@@ -80,22 +81,16 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<link rel="icon" href="/images/favicon.ico" sizes="any" />
+			<link rel="icon" href="/images/pltw.png" sizes="any" />
 			<body
 				className={cn(
 					"min-h-screen bg-background font-sans antialiased",
 					RobotoFont.variable
 				)}
 			>
-				<ThemeProvider
-					attribute="class"
-					defaultTheme="system"
-					enableSystem
-					disableTransitionOnChange
-				>
-					<Headers />
-					{children}
-				</ThemeProvider>
+				<Headers />
+				<Toaster richColors />
+				{children}
 			</body>
 		</html>
 	);
