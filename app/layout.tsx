@@ -72,6 +72,10 @@ const MontserratFont = Montserrat({
 export const metadata: Metadata = {
 	title: "PLTW. WorldWide",
 	description: "Merch",
+	icons: [
+		{ rel: "icon", url: "/images/pltw.png" },
+		{ rel: "apple", url: "/images/pltw.png" },
+	],
 };
 
 export default function RootLayout({
