@@ -64,7 +64,7 @@ export default function Home() {
 						<div className="flex flex-col justify-between h-full p-10">
 							<div className="flex flex-col space-y-5">
 								<div className="text-3xl pb-5 text-gray-800 uppercase border-b text-center border-gray-600 mb-4">
-									PLTW X ZUSH
+									PLTW X UTHM
 								</div>
 								{navItems.map((item, index) => (
 									<Link
